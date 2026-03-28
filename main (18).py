@@ -1407,7 +1407,7 @@ if __name__ == "__main__":
     proc = subprocess.run([
         sys.executable, "-m", "gunicorn",
         "-w", "1", "--threads", "4", "--timeout", "120",
-        "-b", "0.0.0.0:5000",
+        "-b", "0.0.0.0:8080",
         "main:app",
     ])
     sys.exit(proc.returncode)
