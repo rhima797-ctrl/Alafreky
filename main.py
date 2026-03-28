@@ -2,34 +2,21 @@ from flask import Flask, request, jsonify, Response
 import requests as http_requests
 import re
 import os
-import threading
-import time
-import firebase_admin
-from firebase_admin import credentials, db as firebase_db
 
 app = Flask(__name__)
 
-# ─── إعدادات Firebase المصلحة ──────────────────
-_SERVICE_ACCOUNT_PATH = os.path.join(os.path.dirname(__file__), "serviceAccount.json")
-_firebase_db_url = "https://alafreky-20e4c-default-rtdb.europe-west1.firebasedatabase.app"
-
-if os.path.exists(_SERVICE_ACCOUNT_PATH):
-    try:
-        if not firebase_admin._apps:
-            cred = credentials.Certificate(_SERVICE_ACCOUNT_PATH)
-            firebase_admin.initialize_app(cred, {"databaseURL": _firebase_db_url})
-        print("[firebase] ✓ متصل بنجاح")
-    except Exception as e:
-        print(f"[firebase] ✗ خطأ في الاتصال: {e}")
-else:
-    print("[firebase] ✗ ملف serviceAccount.json غير موجود بجانب main.py")
+# --- تم إلغاء كود Firebase تماماً لضمان استقرار التشغيل ---
 
 @app.route('/')
-def health_check():
-    return "App is Running!", 200
+def home():
+    return "السيرفر يعمل بنجاح بدون Firebase!", 200
 
-# ─── تشغيل السيرفر المتوافق مع Back4App ──────────
+@app.route('/test')
+def test():
+    return jsonify({"status": "success", "message": "API is online"}), 200
+
+# --- إعدادات التشغيل الخاصة بـ Back4App ---
 if __name__ == "__main__":
-    # السيرفر يسحب المنفذ تلقائياً من البيئة (غالباً 8080)
+    # السيرفر يسحب المنفذ تلقائياً (غالباً 8080)
     port = int(os.environ.get("PORT", 8080))
     app.run(host='0.0.0.0', port=port)
