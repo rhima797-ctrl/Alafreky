@@ -9,23 +9,13 @@ import urllib.parse
 import hmac as _hmac
 import hashlib
 import base64 as _b64
-
-import firebase_admin
-from firebase_admin import credentials, db as firebase_db
-
-app = Flask(__name__)
-
-from flask import Flask, request, jsonify, Response
-import os
 import firebase_admin
 from firebase_admin import credentials, db as firebase_db
 
 app = Flask(__name__)
 
 # ─── الإصلاح المعتمد للمسار ──────────────────
-# حذفنا المجلد المكرر "servicAccount.json"
 _SERVICE_ACCOUNT_PATH = os.path.join(os.path.dirname(__file__), "serviceAccount.json")
-
 _firebase_db_url = "https://alafreky-20e4c-default-rtdb.europe-west1.firebasedatabase.app"
 
 FIREBASE_ENABLED = False
@@ -39,7 +29,6 @@ if os.path.exists(_SERVICE_ACCOUNT_PATH):
         print(f"[firebase] ✗ فشل الاتصال: {_fe}")
 else:
     print(f"[firebase] ✗ ملف serviceAccount.json غير موجود")
-    print(f"[firebase] ✗ فشل الاتصال: {_fe}")
 
 
 # ─── Genre mapping ───────────────────────────────────────────────────────────
