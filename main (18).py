@@ -18,8 +18,7 @@ app = Flask(__name__)
 
 # ─── Firebase Init ────────────────────────────────────────────────────────────
 
-_SERVICE_ACCOUNT_PATH = os.path.join(
-    os.path.dirname(__file__), "serviceAccount.json", "servicAccount.json"
+_SERVICE_ACCOUNT_PATH = os.path.join(os.path.dirname(__file__), "serviceAccount.json")
 )
 
 _firebase_db_url = "https://alafreky-20e4c-default-rtdb.europe-west1.firebasedatabase.app"
